@@ -1,0 +1,193 @@
+{
+  "countries": [
+    {
+      "strArea": "American",
+      "coordinates": {
+          "latitude": 40.485786,
+          "longitude": -96.072692            
+        }
+    },
+    {
+      "strArea": "British",
+      "coordinates": {
+          "latitude": 53.402791,
+          "longitude": -1.472588            
+        }
+    },
+    {
+      "strArea": "Canadian",
+      "coordinates": {
+          "latitude": 56.694045,
+          "longitude": -100.138760            
+        }
+    },
+    {
+      "strArea": "Chinese",
+      "coordinates": {
+          "latitude": 33.815536,
+          "longitude": 105.489103            
+        }
+    },
+    {
+      "strArea": "Croatian",
+      "coordinates": {
+          "latitude": 45.689726,
+          "longitude": 16.491601            
+        }
+    },
+    {
+      "strArea": "Dutch",
+      "coordinates": {
+          "latitude": 52.404014,
+          "longitude": 5.742452            
+        }
+    },
+    {
+      "strArea": "Egyptian",
+      "coordinates": {
+          "latitude": 26.224473, 
+          "longitude": 30.323955            
+        }
+    },
+    {
+      "strArea": "French",
+      "coordinates": {
+          "latitude": 47.349077, 
+          "longitude": 2.599380            
+        }
+    },
+    {
+      "strArea": "Greek",
+      "coordinates": {
+          "latitude": 39.769546, 
+          "longitude": 21.893914            
+        }
+    },
+    {
+      "strArea": "Indian",
+      "coordinates": {
+          "latitude": 21.840852, 
+          "longitude": 79.975545            
+        }
+    },
+    {
+      "strArea": "Irish",
+      "coordinates": {
+          "latitude": 53.537788,
+          "longitude": -8.011816            
+        }
+    },
+    {
+      "strArea": "Italian",
+      "coordinates": {
+          "latitude": 42.579581, 
+          "longitude": 13.149301            
+        }
+    },
+    {
+      "strArea": "Jamaican",
+      "coordinates": {
+          "latitude": 18.216815, 
+          "longitude": -77.386477            
+        }
+    },
+    {
+      "strArea": "Japanese",
+      "coordinates": {
+          "latitude": 37.030671, 
+          "longitude": 139.330825            
+        }
+    },
+    {
+      "strArea": "Kenyan",
+      "coordinates": {
+          "latitude": 1.055844, 
+          "longitude": 38.002925            
+        }
+    },
+    {
+      "strArea": "Malaysian",
+      "coordinates": {
+          "latitude": 4.085913, 
+          "longitude": 102.340099            
+        }
+    },
+    {
+      "strArea": "Mexican",
+      "coordinates": {
+          "latitude": 23.256971, 
+          "longitude": -102.401475            
+        }
+    },
+    {
+      "strArea": "Moroccan",
+      "coordinates": {
+          "latitude": 31.550678, 
+          "longitude": -6.537699            
+        }
+    },
+    {
+      "strArea": "Polish",
+      "coordinates": {
+          "latitude": 51.994450, 
+          "longitude": 19.516344            
+        }
+    },
+    {
+      "strArea": "Portuguese",
+      "coordinates": {
+          "latitude": 40.141292, 
+          "longitude": -8.077709            
+        }
+    },
+    {
+      "strArea": "Russian",
+      "coordinates": {
+          "latitude": 62.702923, 
+          "longitude": 98.760051            
+        }
+    },
+    {
+      "strArea": "Spanish",
+      "coordinates": {
+          "latitude": 40.323319, 
+          "longitude": -3.230891            
+        }
+    },
+    {
+      "strArea": "Thai",
+      "coordinates": {
+          "latitude": 15.552219, 
+          "longitude": 101.496981            
+        }
+    },
+    {
+      "strArea": "Tunisian",
+      "coordinates": {
+          "latitude": 33.818604, 
+          "longitude": 9.460182            
+        }
+    },
+    {
+      "strArea": "Turkish",
+      "coordinates": {
+          "latitude": 38.945810, 
+          "longitude": 37.027404            
+        }
+    },
+    {
+      "strArea": "Unknown",
+      "coordinates": {
+          "latitude": 41.725556, 
+          "longitude": -49.946944            
+        }
+    },
+    {
+      "strArea": "Vietnamese",
+      "coordinates": {
+          "latitude": 13.779282, 
+          "longitude": 108.460920            
+        }
+    }
+  ]
+}

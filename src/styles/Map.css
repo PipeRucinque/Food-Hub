@@ -1,0 +1,11 @@
+.leaflet-container{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    line-height: center;
+    width: 60rem;
+    height: 30rem;
+    border-radius: 12px;
+    box-shadow: 6px 10px 10px black;
+    
+}
