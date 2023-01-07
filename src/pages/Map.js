@@ -2,26 +2,12 @@ import React, {useState, useEffect} from 'react'
 import '../styles/Map.css'
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
 import countries from '../data/countriesLocation.json'
+import PopupList from '../components/PopupList'
 
 const countriesArray = countries.countries 
 
 function Map() {
-  const apiMeal = process.env.REACT_APP_API_MEAL
-
-  const [countries, setCountries] = useState([])
-
-  const getData = async () => {
-    try {
-      const fetchito = await (await fetch(`${apiMeal}/list.php?a=list`)).json()
-      setCountries(fetchito)
-    } catch (error) {
-      console.log('Error en getData', error);
-    }
-  }
-
-  useEffect(() => {
-    getData()
-  }, [])
+  console.log(countriesArray);
   
   return (
     <>
@@ -31,7 +17,11 @@ function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {countriesArray.map((country) => (
-            <Marker position={[country.coordinates.latitude, country.coordinates.longitude]}></Marker>
+            <Marker position={[country.coordinates.latitude, country.coordinates.longitude]}>
+              <Popup>
+                <PopupList country={country.strArea}/>
+              </Popup>
+            </Marker>
         ))}
     </MapContainer>
     </>
