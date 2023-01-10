@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { Popover } from 'react-bootstrap';
+import { NavLink, Link } from "react-router-dom";
 import Loader from './Loader'
-import Popover from 'react-bootstrap/Popover';
 
 const PopupList = ({country}) => {
     console.log(country);
@@ -13,7 +14,7 @@ const PopupList = ({country}) => {
             const dishFetch = await (await fetch(`${apiMeal}/filter.php?a=${country}`)).json()
             setDish(dishFetch)
         } catch (error) {
-            console.log('Error en getData', error);
+            console.log('Error en el dishFetch', error);
         }
     }
     
@@ -28,11 +29,18 @@ const PopupList = ({country}) => {
                 (<Popover id="popover-basic">
                     <Popover.Header as="h3">{country}</Popover.Header>
                         {dish.meals.map((dish) => (
-                            <Popover.Body>
-                                <ul>
-                                    <li><a href='#'>{dish.strMeal}</a></li>
-                                </ul>
-                            </Popover.Body>
+                            // <Popover.Body>
+                            //     <ul>
+                            //         <li><a href='#'>{dish.strMeal}</a></li>
+                            //     </ul>
+                            // </Popover.Body>
+                            <NavLink
+                                to={`/dish/:${dish.strMeal}`}
+                                variant="outline-primary"
+                                dish={dish.strMeal}
+                            >
+                                {dish.strMeal}
+                            </NavLink>
                         ))}
                 </Popover>)
             }
