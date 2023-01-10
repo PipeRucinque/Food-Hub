@@ -12,6 +12,7 @@ h1{
 
 .img-ingredients{
     display: flex;
+    justify-content: space-around;
 }
 
 .dishInfo{

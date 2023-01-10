@@ -1,9 +1,14 @@
 import React, { useState, useEffect} from 'react'
-import '../styles/Meal.css'
-import {useParams} from "react-router-dom";
-import Mapita from '../components/Mapita';
+import '../styles/Dish.css'
+import { useParams } from "react-router-dom";
 import { BsYoutube } from "react-icons/bs";
+import Mapita from '../components/Mapita';
+import Ingredients from '../components/Ingredients';
 
+const styles = {
+  borderRadius: '5px',
+  boxShadow: '6px 10px 10px black',
+}
 
 const Dish = () => {
     const dish = ((useParams().dish).slice(1)).replace(/ /g, "%20")
@@ -28,23 +33,21 @@ const Dish = () => {
         <div className='meal'>
             <h1>{meal.strMeal}</h1>
             <div className='img-ingredients'>
-                <img src={meal.strMealThumb} alt={`${meal.strMeal} img`} />
+                <img src={meal.strMealThumb} style={styles} alt={`${meal.strMeal} img`} />
                 <div className='dishInfo'>
                     <label><strong>Country:</strong> {meal.strArea}</label>
                     <br />
                     <label><strong>Category:</strong> {meal.strCategory}</label>
                     <Mapita origin={meal.strArea}/>
                     <a className='YTbtn' href={meal.strYoutube} target="_blank">{<BsYoutube/>}</a>
-                    
                 </div>
+                <Ingredients meal={meal} />
             </div>
             <hr />
             <div className='preparation'>
                 {meal.strInstructions}
             </div>
             <hr />
-
-
         </div>
     )
 }
