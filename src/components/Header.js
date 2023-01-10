@@ -20,14 +20,15 @@ const styles = {
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-                  Food_Hub menu
+                  Food_Hub Menu
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <NavLink className="nav-link" to="/map" style={styles}>Mapa</NavLink>
-                  <NavLink className="nav-link" to="/categories" style={styles}>Categorias</NavLink>
+                  <NavLink className="nav-link" to="/map" style={styles}>Map</NavLink>
+                  <NavLink className="nav-link" to="/categories" style={styles}>Categories</NavLink>
                   <NavLink className="nav-link" to="/landings" style={styles}>Log In</NavLink>
+                  <NavLink className="nav-link" to="/register" style={styles}>Register</NavLink>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
