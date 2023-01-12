@@ -14,6 +14,7 @@ const Dish = () => {
     const dish = ((useParams().dish).slice(1)).replace(/ /g, "%20")
     // console.log(dish);
     const apiMeal = process.env.REACT_APP_API_MEAL;
+    
     const [meal, setMeal] = useState([]);
     console.log(meal);
   

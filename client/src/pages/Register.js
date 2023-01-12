@@ -59,7 +59,12 @@ const Register = () => {
                         onChange={(e) => setTerms(e.target.checked)}
                     />
                 </Form.Group>
-                <Button variant="outline-primary" type="submit">Log In</Button>
+                {(!username || !email || !password) 
+                    ? <Button variant="outline-primary" type="submit" disabled>Log In</Button>
+                    : <Button variant="primary" type="submit">Log In</Button>
+                }
+
+                
             </Form>
         </div>
         );
