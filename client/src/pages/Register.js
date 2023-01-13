@@ -3,33 +3,49 @@ import { Form, Button } from 'react-bootstrap'
 import '../styles/Register.css'
 
 const Register = () => {
-    const [username, setUsername] = useState("")
+    const [userName, setUserName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [terms, setTerms] = useState(false)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+        console.log('Pulsaste btn Log In ');
         e.preventDefault()
-        if (!username || !email || !password || terms == false) {
-            alert('All stages required')
-        }
-        setUsername("")
+        // if (!userName || !email || !password || terms == false) {
+        //     alert('All stages required')
+        // }
+
+    const registerForm = await fetch('http://localhost:5000/registerform', {
+            method: 'POST',
+            headers: { 
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify({ 
+                userName: userName, 
+                email: email,
+                password: password,
+            })
+        }).then(res => res.json())  
+        
+        setUserName("")
         setEmail("")
         setPassword("")
         setTerms(false)
+
+        console.log('await fetch registerForm:', await registerForm);
     }
-    
+
     return (
         <div className='registerForm'>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} action={'/'}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>User name</Form.Label>
                     <Form.Control 
                         type="text" 
                         placeholder="User name" 
-                        name='username' 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)}
+                        name='userName' 
+                        value={userName} 
+                        onChange={(e) => setUserName(e.target.value)}
                     />
                     <br />
                     <Form.Label>Email address</Form.Label>
@@ -59,12 +75,10 @@ const Register = () => {
                         onChange={(e) => setTerms(e.target.checked)}
                     />
                 </Form.Group>
-                {(!username || !email || !password) 
+                {(!userName || !email || !password) 
                     ? <Button variant="outline-primary" type="submit" disabled>Log In</Button>
                     : <Button variant="primary" type="submit">Log In</Button>
-                }
-
-                
+                }  
             </Form>
         </div>
         );

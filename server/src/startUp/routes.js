@@ -1,28 +1,18 @@
-const express = require('express')
-const app = express()
-
-const bodyParser = require('body-parser')
-const jsonParser = bodyParser.json()
-const urlencodedParser = bodyParser.urlencoded({ extended: true })
-
-
-
+require("express-async-errors");
+const users = require("../routes/users");
+const errors = require("../middleware/errors");
+const helmet = require("helmet");
+const compression = require("compression");
+const express = require("express");
+//const auths = require("../routes/auths");
 
 module.exports = function (app) {
-    app.get('/', (req, res) => {
-        res.json({response: 'success'})
-    })
-    app.get('/ping', (req, res) => {
-        res.send('pong')
-    })
-    app.post('/login', jsonParser, (req, res) => {
-        console.log(req.body);
-        if (req.body.userName === 'pipe' && req.body.password === 'pipe123') {
-            res.json({response: 'eeeeexitooo'})
-        } else {
-            res.json({response: 'loser!!!'})
-        }
-        
-    })
-}
+  app.use(express.json());
+  app.use(helmet());
+  app.use(compression());
+  app.use(errors);
+  //app.use("/auths", auths);
+  
+  app.use("/registerform", users);
 
+};

@@ -1,17 +1,14 @@
-const mongoose = require('mongoose')
-const jwt = require('jsonwebtoken')
-const _ = require('lodash')
-const config = require('config')
-const Joi = require('joi')
-
-const joiValidator = require('../middleware/joiValidator')
-
-
+const mongoose = require("mongoose");
+const config = require("config");
+const jwt = require("jsonwebtoken");
+const Joi = require("joi");
+const _ = require("lodash");
+const validator = require("../middleware/joiValidator");
 
 const userSchema = new mongoose.Schema({
     userName: {
         type: String,
-        required: true,
+        required: false,
     },
     email: {
         type: String,
@@ -25,18 +22,17 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-// userSchema.methods.generateToken = function () {
-    //     return jwt.sign(
-        //         _.pick(this, ['_id', 'userName', ]),
-        
-        //     )
-        // }
+userSchema.methods.generateToken = function () {
+  return jwt.sign(
+    _.pick(this, ["_id", "userName"]),
+    config.get("jwtPrivateKey")
+  );
+};
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model("User", userSchema);
 
 const reqSchema = Joi.object({
     userName: Joi.string(),
-
     email: Joi.string()
         .email()
         .required()
@@ -47,4 +43,4 @@ const reqSchema = Joi.object({
 })
 
 exports.User = User;
-exports.validateBody = joiValidator(reqSchema)
+exports.validateBody = validator(reqSchema)
