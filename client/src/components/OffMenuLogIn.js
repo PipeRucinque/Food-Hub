@@ -7,19 +7,35 @@ const styles = {
     top: '56px'
 }
 
-const OffMenuLogIn = ({handleShow}) => {
-    
-    const [show, setShow] = useState(true);
+const OffMenuLogIn = ({handleShow, show}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    console.log(email, password);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!email || !password) {
-            alert('Lack of data')
-        }
+        // if (!email || !password) {
+        //     alert('Lack of data')
+        // }
+
+        const loginForm = await fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: { 
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify({
+                email: email, 
+                password: password
+            })
+        })
+
         setEmail("")
         setPassword("")
+        console.log('component Log In Submit button', email, password);
+
+        console.log(await loginForm.json());
+
+        
     }
 
     return (
@@ -33,7 +49,7 @@ const OffMenuLogIn = ({handleShow}) => {
                 <Offcanvas.Title>Log In</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} method='post' action={`http://localhost:5000/ping`}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 

@@ -7,7 +7,6 @@ import PopupList from '../components/PopupList'
 const countriesArray = countries.countries 
 
 function Map() {
-  console.log(countriesArray);
   
   return (
     <>

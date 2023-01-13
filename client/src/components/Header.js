@@ -37,13 +37,13 @@ const Header = () => {
               <NavLink className="nav-link" to="/categories" style={styles}>Categories</NavLink>
               {!terms 
                 ? <NavLink className="nav-link" to="/register" style={styles}>Register</NavLink>
-                : <NavLink className="nav-link" to="favorites" style={styles}>Favorites</NavLink>
+                : <NavLink className="nav-link" to="/favorites" style={styles}>Favorites</NavLink>
               }
               {!terms 
                 ? <NavLink className="nav-link" onClick={handleShow} style={styles}>Log In</NavLink>
                 : <NavLink className="nav-link" to="#" style={styles}>Log Out</NavLink> 
               }
-              {show ? <OffMenuLogIn handleShow={handleShow}/> : null}
+              {show ? <OffMenuLogIn handleShow={handleShow} show={show}/> : null}
               
             </Nav>
           </Container>

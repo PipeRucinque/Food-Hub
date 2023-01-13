@@ -1,0 +1,4 @@
+{
+  "jwtPrivateKey": "FOOD_HUB_JWT_PRIVATE_KEY",
+  "db": "MONGO_URI"
+}

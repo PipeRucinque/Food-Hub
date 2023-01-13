@@ -4,10 +4,8 @@ import { NavLink, Link } from "react-router-dom";
 import Loader from './Loader'
 
 const PopupList = ({country}) => {
-    console.log(country);
     const apiMeal = process.env.REACT_APP_API_MEAL
     const [dish, setDish] = useState([])
-    console.log(dish.meals);
     
     const getData = async () => {
         try {
