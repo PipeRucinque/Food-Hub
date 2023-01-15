@@ -14,5 +14,6 @@ module.exports = function (app) {
   //app.use("/auths", auths);
   
   app.use("/registerform", users);
+  app.use("/login", users);
 
 };
