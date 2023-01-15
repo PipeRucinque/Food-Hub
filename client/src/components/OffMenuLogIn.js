@@ -19,7 +19,7 @@ const OffMenuLogIn = ({handleShow, show}) => {
         // }
 
         const loginForm = await fetch('http://localhost:5000/login', {
-            method: 'POST',
+            method: 'get',
             headers: { 
                 "Content-Type": "application/json" 
             },
@@ -27,15 +27,12 @@ const OffMenuLogIn = ({handleShow, show}) => {
                 email: email, 
                 password: password
             })
-        })
+        }).then(res => res.json())  
 
         setEmail("")
         setPassword("")
         console.log('component Log In Submit button', email, password);
-
-        console.log(await loginForm.json());
-
-        
+        console.log(await loginForm);
     }
 
     return (
@@ -49,7 +46,7 @@ const OffMenuLogIn = ({handleShow, show}) => {
                 <Offcanvas.Title>Log In</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                <Form onSubmit={handleSubmit} method='post' action={`http://localhost:5000/ping`}>
+                <Form onSubmit={handleSubmit} method='get' action={`http://localhost:5000/ping`}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 
