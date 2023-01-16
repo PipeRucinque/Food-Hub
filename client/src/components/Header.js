@@ -9,7 +9,7 @@ const styles = {
 
 const Header = () => {
 
-  const [terms, setTerms] = useState(false)
+  const [isLogged, setIsLogged] = useState(false)
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -28,18 +28,18 @@ const Header = () => {
             <Form.Check 
               type="checkbox" 
               label="True/False"
-              value={terms} 
-              onChange={(e) => setTerms(e.target.checked)}
+              value={isLogged} 
+              onChange={(e) => setIsLogged(e.target.checked)}
               style={{color: 'white'}}
             />
             <Nav className="justify-content-end flex-grow-1 pe-3">
               <NavLink className="nav-link" to="/map" style={styles}>Map</NavLink>
               <NavLink className="nav-link" to="/categories" style={styles}>Categories</NavLink>
-              {!terms 
+              {!isLogged 
                 ? <NavLink className="nav-link" to="/register" style={styles}>Register</NavLink>
                 : <NavLink className="nav-link" to="/favorites" style={styles}>Favorites</NavLink>
               }
-              {!terms 
+              {!isLogged 
                 ? <NavLink className="nav-link" onClick={handleShow} style={styles}>Log In</NavLink>
                 : <NavLink className="nav-link" to="#" style={styles}>Log Out</NavLink> 
               }

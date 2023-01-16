@@ -11,9 +11,9 @@ const Register = () => {
     const handleSubmit = async (e) => {
         console.log('Pulsaste btn Log In ');
         e.preventDefault()
-        // if (!userName || !email || !password || terms == false) {
-        //     alert('All stages required')
-        // }
+        if (!userName || !email || !password) {
+            alert('All stages required')
+        }
 
     const registerForm = await fetch('http://localhost:5000/registerform', {
             method: 'POST',
@@ -25,15 +25,21 @@ const Register = () => {
                 email: email,
                 password: password,
             })
-        }).then(res => res.json())  
-        
+        }).then(res => res.json()).catch((err) => err)
+          
         setUserName("")
         setEmail("")
         setPassword("")
         setTerms(false)
 
-        console.log('await fetch registerForm:', await registerForm);
+        if (registerForm.message) {
+            alert('Ya te habias registrado.. LOSER!!!')
+        } else {
+            console.log('await fetch registerForm:', registerForm);
+        }
     }
+
+
 
     return (
         <div className='registerForm'>
@@ -67,14 +73,14 @@ const Register = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check 
                         type="checkbox" 
                         label="Acepto terminos y condiciones"
                         value={terms} 
                         onChange={(e) => setTerms(e.target.checked)}
                     />
-                </Form.Group>
+                </Form.Group> */}
                 {(!userName || !email || !password) 
                     ? <Button variant="outline-primary" type="submit" disabled>Log In</Button>
                     : <Button variant="primary" type="submit">Log In</Button>

@@ -20,7 +20,6 @@ const Categories = () => {
         getData()
     },[])
 
-    // if (!categories) return null
     return (
         <>
             <div>Food Categories</div>

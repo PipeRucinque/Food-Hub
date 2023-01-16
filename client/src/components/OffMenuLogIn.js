@@ -19,7 +19,7 @@ const OffMenuLogIn = ({handleShow, show}) => {
         // }
 
         const loginForm = await fetch('http://localhost:5000/login', {
-            method: 'get',
+            method: 'GET',
             headers: { 
                 "Content-Type": "application/json" 
             },
@@ -46,7 +46,7 @@ const OffMenuLogIn = ({handleShow, show}) => {
                 <Offcanvas.Title>Log In</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                <Form onSubmit={handleSubmit} method='get' action={`http://localhost:5000/ping`}>
+                <Form onSubmit={handleSubmit} method='GET' action={`/`}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 
