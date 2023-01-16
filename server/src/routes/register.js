@@ -19,10 +19,8 @@ router.post('/', async (req, res) => {
             return response
         })
         res.status(200).json(user)
-
         // const token = user.generateToken();
         // res.header("x-auth-token", token).send("Usuario autentificado")
-        
     } else {
         console.log(`El email ${checkUser.email} ya existe`);
         return res.status(400).json({ message: `El email ${checkUser.email} ya existe` })

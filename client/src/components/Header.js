@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Container, Form, Nav, Navbar, NavDropdown, Button, Offcanvas} from 'react-bootstrap/';
 import { NavLink } from "react-router-dom";
 import OffMenuLogIn from './OffMenuLogIn';
@@ -9,8 +9,26 @@ const styles = {
 
 const Header = () => {
 
-  const [isLogged, setIsLogged] = useState(false)
+  const [terms, setTerms] = useState(false)
   const [show, setShow] = useState(false);
+  
+  const [isLogged, setIsLogged] = useState(false)
+  //console.log(isLogged);
+  const localLogged = localStorage.getItem('isLogged')
+  //console.log(typeof localLogged, localLogged);
+  
+  
+    useEffect(() => {
+      if (localLogged === 'true') {
+      setIsLogged(true)
+      } else {
+        setIsLogged(false)
+      }
+    }, [localLogged])
+    
+    
+  //console.log(isLogged);
+
 
   const handleShow = () => {
     if (show) {
@@ -27,9 +45,9 @@ const Header = () => {
             <Navbar.Brand href="/" style={styles}>Logo Food_Hub</Navbar.Brand>
             <Form.Check 
               type="checkbox" 
-              label="True/False"
-              value={isLogged} 
-              onChange={(e) => setIsLogged(e.target.checked)}
+              label="isLogged / isNotLogged"
+              value={terms} 
+              onChange={(e) => setTerms(e.target.checked)}
               style={{color: 'white'}}
             />
             <Nav className="justify-content-end flex-grow-1 pe-3">

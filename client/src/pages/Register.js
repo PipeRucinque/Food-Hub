@@ -15,7 +15,7 @@ const Register = () => {
             alert('All stages required')
         }
 
-    const registerForm = await fetch('http://localhost:5000/registerform', {
+        const fetchForm = await fetch('http://localhost:5000/registerform', {
             method: 'POST',
             headers: { 
                 "Content-Type": "application/json" 
@@ -25,19 +25,26 @@ const Register = () => {
                 email: email,
                 password: password,
             })
-        }).then(res => res.json()).catch((err) => err)
+        })
+        console.log(fetchForm.status);
+
+        const registerForm = await fetchForm.json()
           
         setUserName("")
         setEmail("")
         setPassword("")
         setTerms(false)
 
-        if (registerForm.message) {
-            alert('Ya te habias registrado.. LOSER!!!')
+        if (fetchForm.status == 200) {
+            console.log('registerForm if:', registerForm)
+            alert(`Welcome ${registerForm.userName}`)
+            localStorage.setItem('isLogged', true)
         } else {
-            console.log('await fetch registerForm:', registerForm);
+            console.log('registerForm else:', registerForm)
+            alert('Ya te habias registrado.. LOSER!!!')
         }
     }
+
 
 
 
