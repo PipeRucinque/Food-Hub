@@ -7,10 +7,13 @@ const styles = {
     top: '56px'
 }
 
-const OffMenuLogIn = ({handleShow, show}) => {
+const OffMenuLogIn = ({handleShowLogIn, showLogIn}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    console.log(email, password);
+    
+    if (email && password) {
+        console.log(email, password);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -37,9 +40,9 @@ const OffMenuLogIn = ({handleShow, show}) => {
 
     return (
         <Offcanvas 
-            show={show} 
+            show={showLogIn} 
             placement="end" 
-            onHide={handleShow}
+            onHide={handleShowLogIn}
             style={styles}
         >
             <Offcanvas.Header closeButton>
