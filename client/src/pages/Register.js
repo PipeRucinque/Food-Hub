@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import LoggedContext from '../context/LoggedContext'
+import useIsLogged from '../hooks/useIsLogged'
 import { Form, Button } from 'react-bootstrap'
 import '../styles/Register.css'
 
@@ -8,9 +10,11 @@ const Register = () => {
     const [password, setPassword] = useState("")
     const [terms, setTerms] = useState(false)
 
+    const [isLogged, setIsLogged] = useContext(LoggedContext)
+
     const handleSubmit = async (e) => {
         console.log('Pulsaste btn Log In ');
-        e.preventDefault()
+        //e.preventDefault()
         if (!userName || !email || !password) {
             alert('All stages required')
         }
@@ -38,15 +42,14 @@ const Register = () => {
         if (fetchForm.status == 200) {
             console.log('registerForm if:', registerForm)
             alert(`Welcome ${registerForm.userName}`)
-            localStorage.setItem('isLogged', true)
+            setIsLogged(true)
+            localStorage.setItem('storeLogged', 'isLogged')
         } else {
             console.log('registerForm else:', registerForm)
+            localStorage.setItem('storeLogged', 'isNotLogged')
             alert('Ya te habias registrado.. LOSER!!!')
         }
     }
-
-
-
 
     return (
         <div className='registerForm'>
