@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import LoggedContext from '../context/LoggedContext';
-import {Container, Form, Nav, Navbar, NavDropdown, Button, Offcanvas} from 'react-bootstrap/';
+import userContext from '../context/userContext'
+import {Container, Nav, Navbar} from 'react-bootstrap/';
 import { NavLink } from "react-router-dom";
 import OffMenuLogIn from './OffMenuLogIn';
 import OffMenuLogOut from './OffMenuLogOut';
@@ -10,20 +11,14 @@ const styles = {
 }
 
 const Header = () => {
-  const storeLogged = localStorage.getItem('storeLogged')
-  
+  //const storeLogged = localStorage.getItem('storeLogged')
+  // const storeToken = localStorage.getItem('token')
   const [isLogged, setIsLogged] = useContext(LoggedContext)
-
+  const [userLogged, setUserLogged] = useState({})
+  console.log('USER: ', userLogged, 'LOG STATE: ', isLogged);
   const [showLogIn, setShowLogIn] = useState(false);
   const [showLogOut, setShowLogOut] = useState(false);
 
-  useEffect(() => {
-    if (storeLogged === 'isLogged') {
-    setIsLogged(true)
-    } else {
-      setIsLogged(false)
-    }
-  }, [])
 
   const handleShowLogIn = () => {
     if (showLogIn) {

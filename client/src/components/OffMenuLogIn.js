@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Form, Button, Offcanvas} from 'react-bootstrap/';
 
 const styles = {
@@ -10,21 +10,17 @@ const styles = {
 const OffMenuLogIn = ({handleShowLogIn, showLogIn}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    
-    if (email && password) {
-        console.log(email, password);
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // if (!email || !password) {
-        //     alert('Lack of data')
-        // }
+        if (!email || !password) {
+            alert('Rellena todos los campos')
+        }
 
         const loginForm = await fetch('http://localhost:5000/login', {
             method: 'POST',
             headers: { 
-                "Content-Type": "application/json" 
+                "Content-Type": "application/json",
             },
             mode: 'cors',
             body: JSON.stringify({
@@ -32,14 +28,23 @@ const OffMenuLogIn = ({handleShowLogIn, showLogIn}) => {
                 password: password
             })
         })
-        console.log('offMenuLogIn loginForm: ', loginForm);
-
-        const loginFormJson = await loginForm.json()
-        console.log('offMenuLogIn loginFormJson: ', loginFormJson);
-
-        setEmail("")
-        setPassword("")
-        console.log('component Log In Submit button', email, password);
+        const loginformJson = loginForm.json()
+        
+        if (loginForm.status === 200) {
+            localStorage.setItem('token', loginForm.headers.get('x-auth-token'))
+            setEmail("")
+            setPassword("")
+            handleShowLogIn(false)
+            window.location.href = '/'
+        } else if (loginForm.status === 401) {
+            alert('Email y/o password invalidos')   
+            setEmail("")
+            setPassword("")
+        }else if (loginForm.status === 404)
+            alert('Usuario no registrado')
+            setEmail("")
+            setPassword("")
+                
     }
 
     return (
@@ -53,7 +58,7 @@ const OffMenuLogIn = ({handleShowLogIn, showLogIn}) => {
                 <Offcanvas.Title>Log In</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                <Form onSubmit={handleSubmit} method='POST' action={`/`}>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 
