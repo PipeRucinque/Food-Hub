@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import LoggedContext from '../context/LoggedContext'
-import useIsLogged from '../hooks/useIsLogged'
+import userContext from '../context/userContext'
 import { Form, Button } from 'react-bootstrap'
 import '../styles/Register.css'
 
 const Register = () => {
+    const [isLogged, setIsLogged] = useContext(LoggedContext)
+    const [userLogged, setUserLogged] = useContext(userContext)
     const [userName, setUserName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [terms, setTerms] = useState(false)
 
-    const [isLogged, setIsLogged] = useContext(LoggedContext)
 
     const handleSubmit = async (e) => {
-        console.log('Pulsaste btn Log In ');
-        //e.preventDefault()
+        e.preventDefault()
         if (!userName || !email || !password) {
             alert('All stages required')
         }
@@ -22,38 +22,38 @@ const Register = () => {
         const fetchForm = await fetch('http://localhost:5000/registerform', {
             method: 'POST',
             headers: { 
-                "Content-Type": "application/json" 
+                "Content-Type": "application/json",
             },
+            mode: 'cors',
             body: JSON.stringify({ 
-                userName: userName, 
+                userName: userName,
                 email: email,
                 password: password,
             })
         })
-        console.log(fetchForm.status);
 
         const registerForm = await fetchForm.json()
-          
+        console.log(fetchForm);
+        console.log(registerForm);
+        if (fetchForm.status === 200) {
+            alert(`Welcome ${registerForm.userName}`)
+            localStorage.setItem('token', fetchForm.headers.get('x-auth-token'))
+            // el setUserLogged de abajo sera mejor meterlo en el localstorage, como un objeto o cada propiedad como una clave???? 
+            setUserLogged({userName: registerForm.userName, email: registerForm.email})
+            window.location.href = '/'
+        } else {
+            localStorage.removeItem('token')
+            alert('Ya te habias registrado.. LOSER!!!')
+        }
         setUserName("")
         setEmail("")
         setPassword("")
         setTerms(false)
-
-        if (fetchForm.status == 200) {
-            console.log('registerForm if:', registerForm)
-            alert(`Welcome ${registerForm.userName}`)
-            setIsLogged(true)
-            localStorage.setItem('storeLogged', 'isLogged')
-        } else {
-            console.log('registerForm else:', registerForm)
-            localStorage.setItem('storeLogged', 'isNotLogged')
-            alert('Ya te habias registrado.. LOSER!!!')
-        }
     }
 
     return (
         <div className='registerForm'>
-            <Form onSubmit={handleSubmit} action={'/'}>
+            <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>User name</Form.Label>
                     <Form.Control 

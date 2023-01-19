@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Offcanvas} from 'react-bootstrap/';
+import LoggedContext from '../context/LoggedContext';
+import userContext from '../context/userContext'
 
 const styles = {
     height: 'fit-content', 
@@ -8,12 +10,37 @@ const styles = {
 }
 
 const OffMenuLogOut = ({handleShowLogOut, showLogOut}) => {
+    const [isLogged, setIsLogged] = useContext(LoggedContext)
+    const [userLogged, setUserLogged] = useContext(userContext)
+    console.log('USER: ', userLogged, 'LOG STATE: ', isLogged);
+
     const handleLogOut = async (e) => {
-        localStorage.setItem('storeLogged', 'isNotLogged')
+        window.confirm('Te vas?.. que no te gusto?')
+        localStorage.removeItem('token')
         window.location.href = '/'
     }
+
     const handleDeleteAccount = async (e) => {
-        alert('Aun no hace nada, pero lo hará!!!')
+        e.preventDefault()
+
+        const deleteUser = await fetch('http://localhost:5000/deleteuser', {
+            method: 'POST',
+            headers: { 
+                "Content-Type": "application/json",
+                "x-auth-token": localStorage.getItem('token')
+            },
+            mode: 'cors',
+        })
+        
+        if (deleteUser.status === 200) {
+            window.confirm('NOOO.. nos abandonas?')
+            localStorage.removeItem('token')
+            alert('A la final que ni te queriamos!!!')
+            handleShowLogOut(false)
+            window.location.href = '/'
+        } else {
+            alert('Algo raro paso..')
+        }        
     }
 
     return (
@@ -32,6 +59,7 @@ const OffMenuLogOut = ({handleShowLogOut, showLogOut}) => {
             </Offcanvas.Body>
         </Offcanvas>
     )
+    
 }
 
 export default OffMenuLogOut
