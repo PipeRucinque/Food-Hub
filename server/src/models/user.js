@@ -23,10 +23,8 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.methods.generateToken = function () {
-  return jwt.sign(
-    _.pick(this, ["_id", "userName"]),
-    config.get("jwtPrivateKey")
-  );
+  return jwt.sign( _.pick(this, ["_id", "userName"]), config.get("jwtPrivateKey") );
+        //jwt.sign(<payload>,<secreto>)
 };
 
 const User = mongoose.model("User", userSchema);

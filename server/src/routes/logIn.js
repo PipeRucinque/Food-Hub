@@ -1,12 +1,37 @@
 const { User, validateBody } = require("../models/user");
+const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 
 //http://localhost:<port>/login/
-router.get('/', async (req, res) => {
-    res.send(req.body)
-    console.log(req.body);
+router.post('/', async (req, res) => {
+    const { email } = req.body;
+    const checkUser = await User.findOne({ email: email })
+
+    res.send(checkUser)
+
+    //if (!checkUser) return res.status(400).send("Email no registrado")
+
+    // const salt = await bcrypt.genSalt(10);
+    // const hash = await bcrypt.hash(req.body.password, salt);
+    // req.body.password = hash;
+    const checkPassword = await bcrypt.compare(req.body.password, checkUser.password)
     
+    console.log('checkPassword', checkPassword);
+
+
+    // if (checkUser) {
+    //     let user = new User(req.body)
+    //     const salt = await bcrypt.genSalt(10);
+    //     const hash = await bcrypt.hash(user.password, salt);
+    //     user.password = hash;
+
+    //     const token = user.generateToken();
+    //     res.header("x-auth-token", token).status(200).json(user)
+    // } else {
+    //     res.status(400).send("Email y password invalidos")
+    // }
+
 
 });
 

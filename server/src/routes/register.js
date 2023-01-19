@@ -18,9 +18,8 @@ router.post('/', async (req, res) => {
             console.log('usuario ingresado en BBDD', response)
             return response
         })
-        res.status(200).json(user)
-        // const token = user.generateToken();
-        // res.header("x-auth-token", token).send("Usuario autentificado")
+        const token = user.generateToken();
+        res.header("x-auth-token", token).status(200).json(user)
     } else {
         console.log(`El email ${checkUser.email} ya existe`);
         return res.status(400).json({ message: `El email ${checkUser.email} ya existe` })

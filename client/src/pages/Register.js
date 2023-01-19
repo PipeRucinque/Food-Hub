@@ -13,7 +13,7 @@ const Register = () => {
     const [isLogged, setIsLogged] = useContext(LoggedContext)
 
     const handleSubmit = async (e) => {
-        console.log('Pulsaste btn Log In ');
+        console.log('Pulsaste btn Log In');
         //e.preventDefault()
         if (!userName || !email || !password) {
             alert('All stages required')
@@ -22,18 +22,19 @@ const Register = () => {
         const fetchForm = await fetch('http://localhost:5000/registerform', {
             method: 'POST',
             headers: { 
-                "Content-Type": "application/json" 
+                "Content-Type": "application/json",
             },
+            mode: 'cors',
             body: JSON.stringify({ 
-                userName: userName, 
+                userName: userName,
                 email: email,
                 password: password,
             })
         })
-        console.log(fetchForm.status);
 
+        console.log(...fetchForm.headers);
         const registerForm = await fetchForm.json()
-          
+
         setUserName("")
         setEmail("")
         setPassword("")
