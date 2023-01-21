@@ -11,14 +11,11 @@ const styles = {
 }
 
 const Header = () => {
-  //const storeLogged = localStorage.getItem('storeLogged')
-  // const storeToken = localStorage.getItem('token')
   const [isLogged, setIsLogged] = useContext(LoggedContext)
-  const [userLogged, setUserLogged] = useState({})
-  console.log('USER: ', userLogged, 'LOG STATE: ', isLogged);
+  const [userLogged, setUserLogged] = useContext(userContext)
+
   const [showLogIn, setShowLogIn] = useState(false);
   const [showLogOut, setShowLogOut] = useState(false);
-
 
   const handleShowLogIn = () => {
     if (showLogIn) {
@@ -49,7 +46,10 @@ const Header = () => {
               }
               {!isLogged 
                 ? <NavLink className="nav-link" onClick={handleShowLogIn} style={styles}>Log In</NavLink>
-                : <NavLink className="nav-link" onClick={handleShowLogOut} style={styles}>Log Out</NavLink>
+                : (!userLogged 
+                    ? null
+                    : <NavLink className="nav-link" onClick={handleShowLogOut} style={styles}>Hello, {userLogged.userName.charAt(0).toUpperCase() + userLogged.userName.slice(1)}</NavLink>
+                  )
               }
               {showLogIn ? <OffMenuLogIn handleShowLogIn={handleShowLogIn} showLogIn={showLogIn}/> : null}
               {showLogOut ? <OffMenuLogOut handleShowLogOut={handleShowLogOut} showLogOut={showLogOut}/> : null}

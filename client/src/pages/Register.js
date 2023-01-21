@@ -33,13 +33,14 @@ const Register = () => {
         })
 
         const registerForm = await fetchForm.json()
-        console.log(fetchForm);
-        console.log(registerForm);
         if (fetchForm.status === 200) {
             alert(`Welcome ${registerForm.userName}`)
             localStorage.setItem('token', fetchForm.headers.get('x-auth-token'))
-            // el setUserLogged de abajo sera mejor meterlo en el localstorage, como un objeto o cada propiedad como una clave???? 
-            setUserLogged({userName: registerForm.userName, email: registerForm.email})
+            const userLogged = {
+                userName: registerForm.userName, 
+                email: registerForm.email
+            }
+            localStorage.setItem('userLogged', JSON.stringify(userLogged))
             window.location.href = '/'
         } else {
             localStorage.removeItem('token')
