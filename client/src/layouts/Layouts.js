@@ -8,14 +8,18 @@ function Layouts() {
   const [isLogged, setIsLogged] = useState(false)
   const [userLogged, setUserLogged] = useState({})
   console.log('USER: ', userLogged, 'LOG STATE: ', isLogged);
+  
   const storeToken = localStorage.getItem('token')
+  const userLSLogged = JSON.parse(localStorage.getItem('userLogged'))
+
   useEffect(() => {
+    setUserLogged(userLSLogged)
     if (!storeToken) {
     setIsLogged(false)
     } else {
       setIsLogged(true)
     }
-  }, [storeToken])
+  }, [])
 
   return (
     <LoggedContext.Provider value={[isLogged, setIsLogged]}>

@@ -16,6 +16,7 @@ const OffMenuLogOut = ({handleShowLogOut, showLogOut}) => {
 
     const handleLogOut = async (e) => {
         window.confirm('Te vas?.. que no te gusto?')
+        localStorage.removeItem('userLogged')
         localStorage.removeItem('token')
         window.location.href = '/'
     }
@@ -30,11 +31,15 @@ const OffMenuLogOut = ({handleShowLogOut, showLogOut}) => {
                 "x-auth-token": localStorage.getItem('token')
             },
             mode: 'cors',
+            body: JSON.stringify({
+                email: userLogged.email, 
+            })
         })
         
         if (deleteUser.status === 200) {
             window.confirm('NOOO.. nos abandonas?')
             localStorage.removeItem('token')
+            localStorage.removeItem('userLogged')
             alert('A la final que ni te queriamos!!!')
             handleShowLogOut(false)
             window.location.href = '/'

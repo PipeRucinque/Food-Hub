@@ -28,10 +28,17 @@ const OffMenuLogIn = ({handleShowLogIn, showLogIn}) => {
                 password: password
             })
         })
-        const loginformJson = loginForm.json()
+        const loginformJson = await loginForm.json()
+        console.log(loginForm);
+        console.log(loginformJson);
         
         if (loginForm.status === 200) {
             localStorage.setItem('token', loginForm.headers.get('x-auth-token'))
+            const userLogged = {
+                userName: loginformJson.userName, 
+                email: loginformJson.email
+            }
+            localStorage.setItem('userLogged', JSON.stringify(userLogged))
             setEmail("")
             setPassword("")
             handleShowLogIn(false)
