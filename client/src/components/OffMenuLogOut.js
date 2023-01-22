@@ -12,39 +12,43 @@ const styles = {
 const OffMenuLogOut = ({handleShowLogOut, showLogOut}) => {
     const [isLogged, setIsLogged] = useContext(LoggedContext)
     const [userLogged, setUserLogged] = useContext(userContext)
-    console.log('USER: ', userLogged, 'LOG STATE: ', isLogged);
 
     const handleLogOut = async (e) => {
-        window.confirm('Te vas?.. que no te gusto?')
-        localStorage.removeItem('userLogged')
-        localStorage.removeItem('token')
-        window.location.href = '/'
+        if (window.confirm('Te vas?.. que no te gusto?') === true) {
+            localStorage.removeItem('userLogged')
+            localStorage.removeItem('token')
+            window.location.href = '/'
+        } else {
+            handleShowLogOut(false)
+        }
     }
 
     const handleDeleteAccount = async (e) => {
-        e.preventDefault()
 
-        const deleteUser = await fetch('http://localhost:5000/deleteuser', {
-            method: 'POST',
-            headers: { 
-                "Content-Type": "application/json",
-                "x-auth-token": localStorage.getItem('token')
-            },
-            mode: 'cors',
-            body: JSON.stringify({
-                email: userLogged.email, 
-            })
-        })
-        
-        if (deleteUser.status === 200) {
-            window.confirm('NOOO.. nos abandonas?')
-            localStorage.removeItem('token')
-            localStorage.removeItem('userLogged')
-            alert('A la final que ni te queriamos!!!')
-            handleShowLogOut(false)
-            window.location.href = '/'
+        if (window.confirm('NOOO.. nos abandonas?') === false) {
+            return handleShowLogOut(false)
         } else {
-            alert('Algo raro paso..')
+            const deleteUser = await fetch('http://localhost:5000/deleteuser', {
+                method: 'POST',
+                headers: { 
+                    "Content-Type": "application/json",
+                    "x-auth-token": localStorage.getItem('token')
+                },
+                mode: 'cors',
+                body: JSON.stringify({
+                    email: userLogged.email, 
+                })
+            })
+            
+            if (deleteUser.status === 200) {
+                localStorage.removeItem('token')
+                localStorage.removeItem('userLogged')
+                alert('A la final que ni te queriamos!!!')
+                handleShowLogOut(false)
+                window.location.href = '/'
+            } else {
+                alert('Algo raro paso..')
+            }
         }        
     }
 

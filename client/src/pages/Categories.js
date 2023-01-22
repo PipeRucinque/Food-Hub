@@ -28,7 +28,7 @@ const Categories = () => {
                     <li key={category.strCategory}>
                         <OverlayTrigger 
                             trigger="click" 
-                            placement="right" 
+                            placement="end" 
                             overlay={<DishByCategory category={category.strCategory}/>}
                         >
                             <Button variant="outline-success">{category.strCategory}</Button>

@@ -13,14 +13,12 @@ router.post('/', async (req, res) => {
         const hash = await bcrypt.hash(user.password, salt);
         user.password = hash;
         await user.save().then((response) => {
-            console.log('usuario ingresado en BBDD', response)
             return response
         })
         
         const token = user.generateToken();
         res.header("x-auth-token", token).header('Access-Control-Expose-Headers', 'x-auth-token').status(200).json(user);
     } else {
-        console.log(`El email ${checkUser.email} ya existe`);
         return res.status(400).json({ message: `El email ${checkUser.email} ya existe` })
     }
 });
