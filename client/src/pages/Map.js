@@ -10,14 +10,14 @@ function Map() {
   
   return (
     <>
-      <MapContainer center={[35.75, 4.25]} zoom={2} scrollWheelZoom={true}>
+      <MapContainer center={[35.75, 4.25]} zoom={2} scrollWheelZoom={false}>
         <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {countriesArray.map((country) => (
             <Marker position={[country.coordinates.latitude, country.coordinates.longitude]}>
-              <Popup>
+              <Popup key={country.strArea}>
                 <PopupList country={country.strArea}/>
               </Popup>
             </Marker>

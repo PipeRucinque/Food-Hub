@@ -29,9 +29,7 @@ const OffMenuLogIn = ({handleShowLogIn, showLogIn}) => {
             })
         })
         const loginformJson = await loginForm.json()
-        console.log(loginForm);
-        console.log(loginformJson);
-        
+
         if (loginForm.status === 200) {
             localStorage.setItem('token', loginForm.headers.get('x-auth-token'))
             const userLogged = {
@@ -51,6 +49,7 @@ const OffMenuLogIn = ({handleShowLogIn, showLogIn}) => {
             alert('Usuario no registrado')
             setEmail("")
             setPassword("")
+            handleShowLogIn(false)
                 
     }
 

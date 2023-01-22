@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Popover } from 'react-bootstrap';
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Loader from './Loader'
 
 const PopupList = ({country}) => {
@@ -27,11 +27,6 @@ const PopupList = ({country}) => {
                 (<Popover id="popover-basic">
                     <Popover.Header as="h3">{country}</Popover.Header>
                         {dish.meals.map((dish) => (
-                            // <Popover.Body>
-                            //     <ul>
-                            //         <li><a href='#'>{dish.strMeal}</a></li>
-                            //     </ul>
-                            // </Popover.Body>
                             <NavLink
                                 to={`/dish/:${dish.strMeal}`}
                                 variant="outline-primary"

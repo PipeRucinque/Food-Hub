@@ -30,3 +30,17 @@ h1{
     margin-right: 30px;
     text-align: justify;
 }
+
+.likeBtn{
+    border-radius: 7px;
+    padding: 3px;
+    transition: 0.5s;
+    font-size: 1.5rem;
+    color: black;
+    cursor: pointer;
+}
+.likeBtn:hover{
+    transition: 0.5s;
+    color:white;
+    background-color: black;
+}
